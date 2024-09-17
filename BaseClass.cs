@@ -16,9 +16,13 @@ namespace Monogame_2
             color = Color.White;
         }
 
+        public virtual void Update(){
+            position.Y++;
+        }
+        
         public void Draw(SpriteBatch spriteBatch){
-        Rectangle Rectangle = new Rectangle((int)position.X,(int)position.Y,100,100);
-        spriteBatch.Draw(texture, Rectangle, color);
-    }
+        Rectangle rectangle = new Rectangle((int)position.X,(int)position.Y,100,100);
+        spriteBatch.Draw(texture, rectangle, color);
+        }
     }
 }

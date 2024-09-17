@@ -1,3 +1,4 @@
+using System.Windows.Forms;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -11,10 +12,7 @@ namespace Monogame_2
             color = Color.Red;
         }
 
-        public virtual void Update(){
-            position.Y++;
-        }
-
+        
 
     }
 }

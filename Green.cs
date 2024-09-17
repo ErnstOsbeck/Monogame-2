@@ -8,7 +8,7 @@ namespace Monogame_2
         float direction = 1;
         public GreenEnemy(Texture2D texture, Vector2 position):base(texture, position)
         {
-            color = Color.Green;
+            color = Color.Lime;
         }
 
         public override void Update()

@@ -1,4 +1,6 @@
-﻿﻿using Microsoft.Xna.Framework;
+﻿﻿using System;
+using System.Collections.Generic;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Monogame_2;
@@ -10,12 +12,8 @@ public class Game1 : Game
 {
     private GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
-
-    BlueEnemy blue;
-    RedEnemy red;
-    GreenEnemy green;
-    YellowEnemy yellow;
     Texture2D pixel;
+    List<BaseClass> enemies = new List<BaseClass>();
 
 
     public Game1()
@@ -38,11 +36,13 @@ public class Game1 : Game
         pixel = new Texture2D(GraphicsDevice,1,1);
         pixel.SetData(new Color[]{Color.White});
 
-        blue = new BlueEnemy(pixel, new Vector2(350,190));
-        red = new RedEnemy(pixel, new Vector2(350,190));
-        green = new GreenEnemy(pixel, new Vector2(350,190));
-        yellow = new YellowEnemy(pixel, new Vector2(350,190));
-
+        enemies.Add(new BlueEnemy(pixel, new Vector2(350,190)));
+        enemies.Add(new RedEnemy(pixel, new Vector2(350,190)));
+        enemies.Add(new GreenEnemy(pixel, new Vector2(350,190)));
+        enemies.Add(new YellowEnemy(pixel, new Vector2(350,190)));
+        enemies.Add(new BlackEnemy(pixel, new Vector2(350,190)));
+        enemies.Add(new WhiteEnemy(pixel, new Vector2(350,190)));
+        
         // TODO: use this.Content to load your game content here
     }
 
@@ -51,24 +51,26 @@ public class Game1 : Game
         if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
             Exit();
 
-        blue.Update();
-        red.Update();
-        green.Update();
-        yellow.Update();
+        foreach(BaseClass enemy in enemies){
+            enemy.Update();
+        }
         base.Update(gameTime);
+    }
+    public void RemoveEnemy(){
+        MouseState ms = Mouse.GetState();
+        
     }
 
     protected override void Draw(GameTime gameTime)
     {
-        GraphicsDevice.Clear(Color.Navy);
+        GraphicsDevice.Clear(Color.SkyBlue);
 
         // TODO: Add your drawing code here
             
             _spriteBatch.Begin();
-            blue.Draw(_spriteBatch);
-            red.Draw(_spriteBatch);
-            green.Draw(_spriteBatch);
-            yellow.Draw(_spriteBatch);
+            foreach(BaseClass enemy in enemies){
+                enemy.Draw(_spriteBatch);
+            }
             _spriteBatch.End();
 
         base.Draw(gameTime);
